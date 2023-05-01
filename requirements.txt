@@ -1,3 +1,5 @@
 aiohttp==3.8.4
+aiohttp-valera-validator==0.1.0
 cabina==0.7.1
+d42==1.5.1
 niltype==0.3.3
