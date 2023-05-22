@@ -1,6 +1,5 @@
 from datetime import datetime
 from hashlib import sha1
-from time import time
 from uuid import uuid4
 
 from niltype import Nil
@@ -55,9 +54,7 @@ class AuthRepository(Repository):
         return maybe_user, None
 
     def _create_user(self, username: str, password: str) -> UserInfo:
-        user_id = int(time() * 1000)
         return {
-            "id": user_id,
             "username": username,
             "password": password,
         }

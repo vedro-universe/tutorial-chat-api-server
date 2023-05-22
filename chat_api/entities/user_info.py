@@ -4,6 +4,5 @@ __all__ = ("UserInfo",)
 
 
 class UserInfo(TypedDict):
-    id: int
     username: str
     password: str
