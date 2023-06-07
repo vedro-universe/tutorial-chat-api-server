@@ -1,4 +1,6 @@
 PROJECT_NAME=chat_api
+HOST=localhost
+PORT=8080
 
 .PHONY: install
 install:
@@ -7,7 +9,7 @@ install:
 
 .PHONY: dev
 dev:
-	HOST=localhost PORT=8080 python3 -m chat_api
+	HOST=${HOST} PORT=${PORT} python3 -m chat_api
 
 .PHONY: check-types
 check-types:
@@ -30,4 +32,4 @@ lint: check-types check-style check-imports
 
 .PHONY: test
 test:
-	cd tests/ && API_URL=http://localhost:8080/tl3mzuetbb vedro run
+	cd tests/ && API_URL=http://${HOST}:${PORT}/tl3mzuetbb vedro run

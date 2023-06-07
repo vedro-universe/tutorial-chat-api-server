@@ -1,0 +1,16 @@
+version: "3.7"
+
+services:
+  app:
+    build: .
+    ports:
+      - "80"
+
+  e2e:
+    build: tests
+    environment:
+      - API_URL=http://app:80/tl3mzuetbb
+    volumes:
+      - ./tests:/e2e
+    depends_on:
+      - app
