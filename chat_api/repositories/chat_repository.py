@@ -15,7 +15,7 @@ class ChatRepository(Repository):
         self._registry = registry
 
     async def send_message(self, namespace: str, chat_id: str, username: str, text: str) -> MaybeResult[MessageInfo]:
-        message = self._create_message(username, text)
+        message = self._create_message(username, text, chat_id)
 
         messages_key = f"{namespace}::{chat_id}::messages"
         maybe_messages = await self._registry.get(messages_key)
@@ -34,10 +34,11 @@ class ChatRepository(Repository):
             return [], None
         return maybe_messages, None
 
-    def _create_message(self, username: str, text: str) -> MessageInfo:
+    def _create_message(self, username: str, text: str, chat_id: str) -> MessageInfo:
         sent_at = int(datetime.utcnow().timestamp())
         return {
+            "chat_id": chat_id,
             "username": username,
-            "message": text,
+            "text": text,
             "sent_at": sent_at,
         }

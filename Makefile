@@ -27,3 +27,7 @@ check-style:
 
 .PHONY: lint
 lint: check-types check-style check-imports
+
+.PHONY: test
+test:
+	cd tests/ && API_URL=http://localhost:8080/tl3mzuetbb vedro run

@@ -3,5 +3,6 @@ from d42 import schema
 __all__ = ("NewMessageSchema",)
 
 NewMessageSchema = schema.dict({
-    "message": schema.str.len(1, 140),
+    "text": schema.str.len(1, 140),
+    "chat_id": schema.str.len(1, 32)
 })

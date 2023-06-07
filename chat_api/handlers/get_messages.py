@@ -5,13 +5,13 @@ from aiohttp_valera_validator import validate
 from d42 import schema
 
 from ..repositories import AuthRepository, ChatRepository
-from ..schemas import AuthTokenSchema, ChatIdSchema, NamespaceSchema
+from ..schemas import AuthTokenSchema, NamespaceSchema, NewMessageSchema
 
 __all__ = ("get_messages",)
 
 SegmentsSchema = schema.dict({
     "namespace": NamespaceSchema,
-    "chat_id": ChatIdSchema,
+    "chat_id": NewMessageSchema["chat_id"],
 })
 
 HeadersSchema = schema.dict({

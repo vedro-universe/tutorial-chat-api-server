@@ -5,5 +5,6 @@ __all__ = ("MessageInfo",)
 
 class MessageInfo(TypedDict):
     username: str
-    message: str
+    text: str
     sent_at: int
+    chat_id: str
