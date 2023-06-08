@@ -25,7 +25,7 @@ class ChatApi(vedro.Interface):
         return response
 
     def send(self, message: dict[str, str], token: str) -> Response:
-        headers = {"Authorization": token}
+        headers = {"X-Auth-Token": token}
         payload = {
             "text": message["text"],
             "chat_id": message["chat_id"]
@@ -35,7 +35,7 @@ class ChatApi(vedro.Interface):
         return response
 
     def retrieve_messages(self, chat_id: str, token: str) -> Response:
-        headers = {"Authorization": token}
+        headers = {"X-Auth-Token": token}
         response = httpx.get(f"{self.api_url}/chats/{chat_id}/messages", headers=headers)
         response.body = response.json()
         return response

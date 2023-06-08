@@ -1,5 +1,6 @@
 from aiohttp import web
 from aiohttp.web import Application
+from aiohttp_swagger import setup_swagger
 
 from .handlers import auth_login, auth_register, get_messages, healthcheck, send_message
 from .repositories import AuthRepository, ChatRepository
@@ -22,5 +23,7 @@ async def create_app() -> Application:
         web.get("/{namespace}/chats/{chat_id}/messages", get_messages),
         web.get("/healthcheck", healthcheck),
     ])
+
+    setup_swagger(app, swagger_url="/docs", ui_version=3, swagger_from_file="docs/openapi.yaml")
 
     return app

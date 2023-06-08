@@ -15,7 +15,7 @@ SegmentsSchema = schema.dict({
 })
 
 HeadersSchema = schema.dict({
-    "Authorization": AuthTokenSchema,
+    "X-Auth-Token": AuthTokenSchema,
     ...: ...
 })
 
@@ -28,7 +28,7 @@ async def get_messages(request: Request) -> Response:
     namespace = request.match_info.get("namespace")
     chat_id = request.match_info.get("chat_id")
 
-    token = request.headers.get("Authorization")
+    token = request.headers.get("X-Auth-Token")
     _, error = await auth_repo.get_user_info(namespace, token)
     if error:
         return json_response({"errors": [error]}, status=HTTPStatus.UNAUTHORIZED)

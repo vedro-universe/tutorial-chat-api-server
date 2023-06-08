@@ -11,5 +11,6 @@ RUN pip3 install --no-cache-dir -r requirements.txt
 RUN apk del build-base gcc musl-dev libffi-dev
 
 COPY chat_api/ chat_api/
+COPY docs/ docs/
 
 CMD ["python3", "-m", "chat_api"]

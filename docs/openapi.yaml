@@ -1,0 +1,295 @@
+openapi: 3.0.3
+info:
+  version: 1.0.0
+  title: Chat API
+paths:
+  /{namespace}/auth/register:
+    post:
+      summary: Register a new user
+      description: Register a new user with a username and password
+      operationId: auth_register
+      parameters:
+        - in: path
+          name: namespace
+          required: true
+          schema:
+            type: string
+            minLength: 10
+            maxLength: 10
+          description: API namespace
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  minLength: 3
+                  maxLength: 12
+                  description: Username for the new user
+                password:
+                  type: string
+                  minLength: 6
+                  description: Password for the new user
+              required:
+                - username
+                - password
+        required: true
+      responses:
+        '200':
+          description: User successfully registered
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  username:
+                    type: string
+                    description: Registered username
+                  password:
+                    type: string
+                    description: Registered password
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: string
+                    description: List of error messages
+
+  /{namespace}/auth/login:
+    post:
+      summary: Authenticate an existing user
+      description: Authenticate an existing user
+      operationId: auth_login
+      parameters:
+        - in: path
+          name: namespace
+          required: true
+          schema:
+            type: string
+            minLength: 10
+            maxLength: 10
+          description: API namespace
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  minLength: 3
+                  maxLength: 12
+                  description: Username of the user
+                password:
+                  type: string
+                  minLength: 6
+                  description: Password of the user
+              required:
+                - username
+                - password
+        required: true
+      responses:
+        '200':
+          description: User successfully logged in
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  username:
+                    type: string
+                    description: Logged in username
+                  token:
+                    type: string
+                    description: Token for the logged in user
+                  created_at:
+                    type: integer
+                    description: Timestamp of token creation
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: string
+                    description: List of error messages
+
+  /{namespace}/chats/{chat_id}/messages:
+    post:
+      summary: Send a message to a chat
+      description: Send a message to a chat with the specified chat_id. A new chat will be created if it doesn't already exist
+      operationId: send_message
+      parameters:
+        - in: path
+          name: namespace
+          required: true
+          schema:
+            type: string
+            minLength: 10
+            maxLength: 10
+          description: API namespace
+        - in: path
+          name: chat_id
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 32
+          description: ID of the chat
+        - in: header
+          name: X-Auth-Token
+          required: true
+          schema:
+            type: string
+            pattern: "^[0-9a-f]{40}$"
+          description: Authentication token for the user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                text:
+                  type: string
+                  minLength: 1
+                  maxLength: 140
+                  description: Message text
+                chat_id:
+                  type: string
+                  minLength: 1
+                  maxLength: 32
+                  description: ID of the chat
+              required:
+                - text
+                - chat_id
+        required: true
+      responses:
+        '200':
+          description: Message successfully sent
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  username:
+                    type: string
+                    description: Sender's username
+                  text:
+                    type: string
+                    description: Sent message text
+                  sent_at:
+                    type: integer
+                    description: Timestamp of message sent
+                  chat_id:
+                    type: string
+                    description: ID of the chat where message was sent
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: string
+                    description: List of error messages
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: string
+                    description: List of error messages
+    get:
+      summary: Retrieve messages for a chat
+      description: Retrieve messages for a chat with the specified chat_id
+      operationId: get_messages
+      parameters:
+        - in: path
+          name: namespace
+          required: true
+          schema:
+            type: string
+            minLength: 10
+            maxLength: 10
+          description: API namespace
+        - in: path
+          name: chat_id
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 32
+          description: ID of the chat
+        - in: header
+          name: X-Auth-Token
+          required: true
+          schema:
+            type: string
+            pattern: "^[0-9a-f]{40}$"
+          description: Authentication token for the user
+      responses:
+        '200':
+          description: Messages successfully fetched
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    username:
+                      type: string
+                      description: Sender's username
+                    text:
+                      type: string
+                      description: Message text
+                    sent_at:
+                      type: integer
+                      description: Timestamp of message sent
+                    chat_id:
+                      type: string
+                      description: ID of the chat where message was sent
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: string
+                    description: List of error messages
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: string
+                    description: List of error messages
