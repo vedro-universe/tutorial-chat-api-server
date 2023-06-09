@@ -145,7 +145,7 @@ paths:
           required: true
           schema:
             type: string
-            minLength: 1
+            minLength: 3
             maxLength: 32
           description: ID of the chat
         - in: header
@@ -168,7 +168,7 @@ paths:
                   description: Message text
                 chat_id:
                   type: string
-                  minLength: 1
+                  minLength: 3
                   maxLength: 32
                   description: ID of the chat
               required:
@@ -237,7 +237,7 @@ paths:
           required: true
           schema:
             type: string
-            minLength: 1
+            minLength: 3
             maxLength: 32
           description: ID of the chat
         - in: header
