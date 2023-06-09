@@ -20,7 +20,7 @@ class Scenario(vedro.Scenario):
         self.response = ChatApi().send(self.message, self.token["token"])
 
     def then_it_should_return_success_response(self):
-        assert self.response.status_code == HTTPStatus.OK, self.response.json()
+        assert self.response.status_code == HTTPStatus.OK
 
     def and_it_should_return_sent_message(self):
         assert self.response.json() == MessageSchema % {

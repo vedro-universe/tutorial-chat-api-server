@@ -8,19 +8,19 @@ from schemas import MessageSchema
 
 
 class Scenario(vedro.Scenario):
-    subject = "retrieve messages"
+    subject = "get message"
 
     def given_user_token(self):
         self.token = logined_user()
 
-    def given_message(self):
+    def given_sent_message(self):
         self.message = sent_message(self.token["token"])
 
-    def when_user_sends_message(self):
-        self.response = ChatApi().retrieve_messages(self.message["chat_id"], self.token["token"])
+    def when_user_retrieves_messages(self):
+        self.response = ChatApi().get_messages(self.message["chat_id"], self.token["token"])
 
     def then_it_should_return_success_response(self):
-        assert self.response.status_code == HTTPStatus.OK, self.response.json()
+        assert self.response.status_code == HTTPStatus.OK
 
     def and_it_should_return_messages(self):
         assert self.response.json() == schema.list([

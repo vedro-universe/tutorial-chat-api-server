@@ -16,7 +16,7 @@ class Scenario(vedro.Scenario):
         self.response = ChatApi().login(self.user)
 
     def then_it_should_return_success_response(self):
-        assert self.response.status_code == HTTPStatus.OK, self.response.json()
+        assert self.response.status_code == HTTPStatus.OK
 
     def and_it_should_return_created_token(self):
         assert self.response.json() == AuthTokenSchema % {
