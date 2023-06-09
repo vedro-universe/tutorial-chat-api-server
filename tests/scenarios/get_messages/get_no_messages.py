@@ -1,7 +1,7 @@
 from http import HTTPStatus
 
 import vedro
-from contexts import logined_user
+from contexts import logged_in_user
 from d42 import fake, schema
 from interfaces import ChatApi
 from schemas import NewMessageSchema
@@ -11,7 +11,7 @@ class Scenario(vedro.Scenario):
     subject = "get no messages"
 
     def given_user_token(self):
-        self.token = logined_user()
+        self.token = logged_in_user()
 
     def given_chat_id(self):
         self.chat_id = fake(NewMessageSchema["chat_id"])

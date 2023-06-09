@@ -5,7 +5,7 @@ from .registered_user import registered_user
 
 
 @vedro.context
-def logined_user(user: dict[str, str] | None = None) -> dict[str, str | int]:
+def logged_in_user(user: dict[str, str] | None = None) -> dict[str, str | int]:
     if user is None:
         user = registered_user()
     response = ChatApi().login(user)

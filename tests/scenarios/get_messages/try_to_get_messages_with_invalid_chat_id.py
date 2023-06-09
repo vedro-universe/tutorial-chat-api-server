@@ -1,7 +1,7 @@
 from http import HTTPStatus
 
 import vedro
-from contexts import logined_user
+from contexts import logged_in_user
 from interfaces import ChatApi
 from schemas import ErrorSchema
 from vedro import params
@@ -16,7 +16,7 @@ class Scenario(vedro.Scenario):
         self.chat_id = "x" * chat_id_len
 
     def given_user_token(self):
-        self.token = logined_user()
+        self.token = logged_in_user()
 
     def when_user_retrieves_messages(self):
         self.response = ChatApi().get_messages(self.chat_id, self.token["token"])

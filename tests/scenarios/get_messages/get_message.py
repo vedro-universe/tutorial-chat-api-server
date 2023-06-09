@@ -1,7 +1,7 @@
 from http import HTTPStatus
 
 import vedro
-from contexts import logined_user, sent_message
+from contexts import logged_in_user, sent_message
 from d42 import schema
 from interfaces import ChatApi
 from schemas import MessageSchema
@@ -11,7 +11,7 @@ class Scenario(vedro.Scenario):
     subject = "get message"
 
     def given_user_token(self):
-        self.token = logined_user()
+        self.token = logged_in_user()
 
     def given_sent_message(self):
         self.message = sent_message(self.token["token"])
