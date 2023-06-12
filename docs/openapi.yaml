@@ -2,6 +2,7 @@ openapi: 3.0.3
 info:
   version: 1.0.0
   title: Chat API
+  description: Chat API for the [Vedro tutorial](https://vedro.io/docs/tutorial)
 paths:
   /{namespace}/auth/register:
     post:
@@ -38,7 +39,9 @@ paths:
         required: true
       responses:
         '200':
-          description: User successfully registered
+          description: >
+            User successfully registered. <br/><br/>
+            Please note that in a typical production setting, returning passwords in the API response is a bad practice and should be avoided. This behavior is implemented in this API to meet tutorial requirements.
           content:
             application/json:
               schema:
