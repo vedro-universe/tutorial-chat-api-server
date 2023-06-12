@@ -5,7 +5,7 @@ from schemas import NewMessageSchema
 
 
 @vedro.context
-def sent_message(token, message: dict[str, str] = None) -> dict[str, str]:
+def sent_message(token: str, message: dict[str, str] | None = None) -> dict[str, str]:
     if message is None:
         message = fake(NewMessageSchema)
     response = ChatApi().send(message, token)
