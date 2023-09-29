@@ -1,4 +1,4 @@
-httpx==0.24.1
-vedro==1.9.1
+httpx==0.25.0
+vedro==1.10.0
 vedro-valera-validator==1.1.1
-vedro-httpx==0.2.0
+vedro-httpx==0.3.0

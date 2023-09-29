@@ -7,7 +7,7 @@ from schemas import ErrorSchema, NewUserSchema
 
 
 class Scenario(vedro.Scenario):
-    subject = "try to login as nonexisting user"
+    subject = "try to login as non-existing user"
 
     def given_user(self):
         self.user = fake(NewUserSchema)

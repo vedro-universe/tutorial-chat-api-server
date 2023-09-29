@@ -7,7 +7,7 @@ from schemas import AuthTokenSchema, ErrorSchema, NewMessageSchema
 
 
 class Scenario(vedro.Scenario):
-    subject = "try to get messages with nonexisting token"
+    subject = "try to get messages with non-existing token"
 
     def given_user_token(self):
         self.token = fake(AuthTokenSchema["token"])
