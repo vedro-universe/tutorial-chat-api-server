@@ -1,5 +1,3 @@
-from http import HTTPStatus
-
 import vedro
 from contexts import logged_in_user
 from d42 import fake
@@ -20,7 +18,7 @@ class Scenario(vedro.Scenario):
         self.response = ChatApi().send(self.message, self.token["token"])
 
     def then_it_should_return_success_response(self):
-        assert self.response.status_code == HTTPStatus.OK
+        assert self.response.status_code == 200
 
     def and_it_should_return_sent_message(self):
         assert self.response.json() == MessageSchema % {
