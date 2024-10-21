@@ -45,12 +45,12 @@ class AuthRepository(Repository):
         maybe_token = await self._registry.get(token_key)
         if maybe_token is Nil:
             return None, "Invalid token"
-    
+
         user_key = f"{namespace}::{maybe_token['username']}::user"
         maybe_user = await self._registry.get(user_key)
         if maybe_user is Nil:
             return None, "Invalid token"
-    
+
         return maybe_user, None
 
     def _create_user(self, username: str, password: str) -> UserInfo:

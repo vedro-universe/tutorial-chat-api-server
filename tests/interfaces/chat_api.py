@@ -20,11 +20,16 @@ class ChatApi(SyncHTTPInterface):
 
     def send(self, message: dict[str, str], token: str) -> Response:
         headers = {"X-Auth-Token": token}
+        segments = {"chat_id": message['chat_id']}
         payload = {
             "text": message["text"],
             "chat_id": message["chat_id"]
         }
-        return self._request("POST", f"/chats/{message['chat_id']}/messages", json=payload, headers=headers)
+        return self._request("POST", "/chats/{chat_id}/messages",
+                             json=payload, headers=headers, segments=segments)
 
     def get_messages(self, chat_id: str, token: str) -> Response:
-        return self._request("GET", f"/chats/{chat_id}/messages", headers={"X-Auth-Token": token})
+        headers = {"X-Auth-Token": token}
+        segments = {"chat_id": chat_id}
+        return self._request("GET", "/chats/{chat_id}/messages",
+                             headers=headers, segments=segments)

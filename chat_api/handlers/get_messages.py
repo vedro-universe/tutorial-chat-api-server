@@ -1,7 +1,7 @@
 from http import HTTPStatus
 
 from aiohttp.web import Request, Response, json_response
-from aiohttp_valera_validator import validate
+from aiohttp_d42_validator import validate
 from d42 import schema
 
 from ..repositories import AuthRepository, ChatRepository
