@@ -1,4 +1,4 @@
-FROM python:3.10-alpine
+FROM python:3.14.10-alpine3.24
 
 WORKDIR /e2e
 

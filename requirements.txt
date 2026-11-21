@@ -1,6 +1,6 @@
-aiohttp==3.10.10
+aiohttp==3.14.5
 aiohttp-d42-validator==0.2.0
 aiohttp-swagger==1.0.16
-cabina==1.0.0
-d42==2.0.2
-niltype==0.3.4
+cabina==1.1.2
+d42==2.4.0
+niltype==1.0.2
